@@ -25,12 +25,6 @@ jobs:
       run:
         shell: bash
 
-    strategy:
-      matrix:
-        ddev_version: [stable, HEAD]
-#        ddev_version: [stable, edge, HEAD, PR]
-      fail-fast: false
-
     runs-on: ubuntu-24.04
 
     steps:
@@ -38,6 +32,8 @@ jobs:
 
     - name: Install DDEV
       uses: mxr576/github-action-setup-ddev@install-ddev-as-binary-without-retry
+      with:
+        autostart: false
   
     - name: Download docker images
       run: mkdir junk && pushd junk && ddev config --auto && ddev debug download-images >/dev/null
